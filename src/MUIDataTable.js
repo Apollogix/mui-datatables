@@ -409,7 +409,7 @@ class MUIDataTable extends React.Component {
     fixedSelectColumn: true,
     pagination: true,
     print: false,
-    resizableColumns: true,
+    resizableColumns: false,
     responsive: 'standard',
     rowHover: true,
     //rowsPerPage: 10,
