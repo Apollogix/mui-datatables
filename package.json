@@ -1,7 +1,7 @@
 {
   "name": "mui-datatables",
-  "version": "4.3.0",
-  "description": "Datatables for React using Material-UI",
+  "version": "4.3.1",
+  "description": "Custom Datatables for React using Material-UI",
   "main": "dist/index.js",
   "files": [
     "dist"
@@ -23,7 +23,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gregnb/mui-datatables.git"
+    "url": "git+https://github.com/Apollogix/mui-datatables.git"
   },
   "keywords": [
     "material-ui",
@@ -31,11 +31,7 @@
     "react"
   ],
   "author": "gregnb <gregnb@gmail.com>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/gregnb/mui-datatables/issues"
-  },
-  "homepage": "https://github.com/gregnb/mui-datatables#readme",
+  "license": "UNLICENSED",
   "devDependencies": {
     "@babel/core": "^7.10.2",
     "@babel/plugin-external-helpers": "^7.10.1",
