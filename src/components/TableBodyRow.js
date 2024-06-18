@@ -14,6 +14,7 @@ const defaultBodyRowStyles = theme => ({
     // material v3 workaround
     '&.mui-row-selected': {
       backgroundColor: theme.palette.action.selected,
+      backgroundColor: 'white',
     },
   },
   hoverCursor: { cursor: 'pointer' },

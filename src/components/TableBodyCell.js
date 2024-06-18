@@ -4,7 +4,10 @@ import TableCell from '@mui/material/TableCell';
 import { makeStyles } from 'tss-react/mui';
 
 const useStyles = makeStyles({ name: 'MUIDataTableBodyCell' })(theme => ({
-  root: {},
+  root: {
+    padding: '0.25rem 0.5rem',
+    fontWeight: 400,
+  },
   cellHide: {
     display: 'none',
   },

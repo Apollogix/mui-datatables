@@ -11,6 +11,8 @@ const useStyles = makeStyles({ name: 'MUIDataTableSelectCell' })(theme => ({
     '@media print': {
       display: 'none',
     },
+    backgroundColor: 'white',
+    padding: '0.25rem 0',
   },
   fixedHeader: {
     position: 'sticky',

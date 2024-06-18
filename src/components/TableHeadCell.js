@@ -28,10 +28,12 @@ const useStyles = makeStyles({ name: 'MUIDataTableHeadCell' })(theme => ({
   },
   data: {
     display: 'inline-block',
+    textTransform: 'uppercase',
   },
   sortAction: {
     display: 'flex',
     cursor: 'pointer',
+    alignItems: 'center',
   },
   dragCursor: {
     cursor: 'grab',
@@ -43,12 +45,12 @@ const useStyles = makeStyles({ name: 'MUIDataTableHeadCell' })(theme => ({
     color: theme.palette.text.primary,
   },
   toolButton: {
-    textTransform: 'none',
-    marginLeft: '-8px',
-    minWidth: 0,
-    marginRight: '8px',
-    paddingLeft: '8px',
-    paddingRight: '8px',
+    minWidth: '15px',
+    marginLeft: 0,
+    marginRight: 0,
+    paddingLeft: 0,
+    paddingRight: 0,
+    justifyContent: 'normal !important',
   },
   contentWrapper: {
     display: 'flex',
@@ -85,6 +87,7 @@ const TableHeadCell = ({
   timers,
   toggleSort,
   updateColumnOrder,
+  scrollX,
 }) => {
   const [sortTooltipOpen, setSortTooltipOpen] = useState(false);
   const [hintTooltipOpen, setHintTooltipOpen] = useState(false);
@@ -162,6 +165,7 @@ const TableHeadCell = ({
     tableRef: tableRef ? tableRef() : null,
     tableId: tableId || 'none',
     timers,
+    scrollX,
   });
 
   const cellClass = clsx({

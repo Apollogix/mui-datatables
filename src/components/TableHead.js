@@ -42,6 +42,7 @@ const TableHead = ({
   toggleAllExpandableRows,
   toggleSort,
   updateColumnOrder,
+  scrollX,
 }) => {
   const { classes } = useStyles();
 
@@ -154,6 +155,7 @@ const TableHead = ({
                 draggableHeadCellRefs={draggableHeadCellRefs}
                 tableRef={tableRef}
                 tableId={tableId}
+                scrollX={scrollX}
                 components={components}>
                 {column.customHeadLabelRender
                   ? column.customHeadLabelRender({ index, colPos, ...column })

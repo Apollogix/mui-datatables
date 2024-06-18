@@ -108,7 +108,7 @@ const STP = {
   REPLACE: 'replace',
   ABOVE: 'above',
   NONE: 'none',
-  ALWAYS: 'always'
+  ALWAYS: 'always',
 };
 
 class MUIDataTable extends React.Component {
@@ -309,6 +309,7 @@ class MUIDataTable extends React.Component {
       },
       showResponsive: false,
       sortOrder: {},
+      scrollX: 0,
     };
 
     this.mergeDefaultOptions(props);
@@ -387,32 +388,32 @@ class MUIDataTable extends React.Component {
     caseSensitive: false,
     consoleWarnings: true,
     disableToolbarSelect: false,
-    download: true,
+    download: false,
     downloadOptions: {
       filename: 'tableDownload.csv',
       separator: ',',
     },
     draggableColumns: {
-      enabled: false,
+      enabled: true,
       transitionTime: 300,
     },
-    elevation: 4,
-    enableNestedDataAccess: '',
+    elevation: 0,
+    enableNestedDataAccess: '.',
     expandableRows: false,
     expandableRowsHeader: true,
     expandableRowsOnClick: false,
-    filter: true,
+    filter: false,
     filterArrayFullMatch: true,
     filterType: 'dropdown',
     fixedHeader: true,
     fixedSelectColumn: true,
     pagination: true,
-    print: true,
-    resizableColumns: false,
-    responsive: 'vertical',
+    print: false,
+    resizableColumns: true,
+    responsive: 'standard',
     rowHover: true,
     //rowsPerPage: 10,
-    rowsPerPageOptions: [10, 15, 100],
+    rowsPerPageOptions: [15, 50, 100],
     search: true,
     selectableRows: 'multiple',
     selectableRowsHideCheckboxes: false,
@@ -422,13 +423,14 @@ class MUIDataTable extends React.Component {
     serverSideFilterList: null,
     setTableProps: () => ({}),
     sort: true,
+    filter: false,
     sortFilterList: true,
     tableBodyHeight: 'auto',
     tableBodyMaxHeight: null, // if set, it will override tableBodyHeight
     sortOrder: {},
     textLabels: getTextLabels(),
     viewColumns: true,
-    selectToolbarPlacement: STP.REPLACE,
+    selectToolbarPlacement: STP.NONE,
   });
 
   warnDep = (msg, consoleWarnings) => {
@@ -604,14 +606,14 @@ class MUIDataTable extends React.Component {
       let columnOptions = {
         display: 'true',
         empty: false,
-        filter: true,
+        filter: false,
         sort: true,
-        print: true,
+        print: false,
         searchable: true,
         download: true,
         viewColumns: true,
         sortCompare: null,
-        sortThirdClickReset: false,
+        sortThirdClickReset: true,
         sortDescFirst: false,
       };
 
@@ -1822,6 +1824,13 @@ class MUIDataTable extends React.Component {
     };
   }
 
+  onScroll(id) {
+    if (id) {
+      const _scrollX = document.getElementById(id).scrollLeft;
+      this.setState({ scrollX: _scrollX });
+    }
+  }
+
   render() {
     const {
       classes,
@@ -1854,6 +1863,7 @@ class MUIDataTable extends React.Component {
       sortOrder,
       serverSideFilterList,
       columnOrder,
+      scrollX,
     } = this.state;
 
     const TableBodyComponent = TableBody || DefaultTableBody;
@@ -1933,7 +1943,8 @@ class MUIDataTable extends React.Component {
 
     return (
       <Paper elevation={this.options.elevation} ref={this.tableContent} className={paperClasses}>
-        {(this.options.selectToolbarPlacement === STP.ALWAYS || selectedRows.data.length > 0 && this.options.selectToolbarPlacement !== STP.NONE) && (
+        {(this.options.selectToolbarPlacement === STP.ALWAYS ||
+          (selectedRows.data.length > 0 && this.options.selectToolbarPlacement !== STP.NONE)) && (
           <TableToolbarSelectComponent
             options={this.options}
             selectedRows={selectedRows}
@@ -1987,7 +1998,11 @@ class MUIDataTable extends React.Component {
           filterUpdate={this.filterUpdate}
           columnNames={columnNames}
         />
-        <div style={{ position: 'relative', ...tableHeightVal }} className={responsiveClass}>
+        <div
+          style={{ position: 'relative', ...tableHeightVal }}
+          className={responsiveClass}
+          onScroll={() => this.onScroll(tableProps.id)}
+          id={tableProps.id}>
           {(this.options.resizableColumns === true ||
             (this.options.resizableColumns && this.options.resizableColumns.enabled)) && (
             <TableResizeComponent
@@ -2006,7 +2021,8 @@ class MUIDataTable extends React.Component {
                 tabIndex={'0'}
                 role={'grid'}
                 className={tableClassNames}
-                {...tableProps}>
+                {...tableProps}
+                id={`${tableProps.id || ''}-table`}>
                 <caption className={classes.caption}>{title}</caption>
                 <TableHeadComponent
                   columns={columns}
@@ -2031,6 +2047,7 @@ class MUIDataTable extends React.Component {
                   tableId={this.options.tableId}
                   timers={this.timers}
                   components={this.props.components}
+                  scrollX={scrollX}
                 />
                 <TableBodyComponent
                   data={displayData}

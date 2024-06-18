@@ -22,6 +22,10 @@ export const defaultToolbarStyles = theme => ({
     '@media print': {
       display: 'none',
     },
+    minHeight: 48,
+    paddingLeft: 0,
+    paddingRight: 0,
+    marginBottom: '0.5rem',
   },
   fullWidthRoot: {},
   left: {
@@ -47,9 +51,13 @@ export const defaultToolbarStyles = theme => ({
     '&:hover': {
       color: theme.palette.primary.main,
     },
+    width: 28,
+    height: 28,
   },
   iconActive: {
     color: theme.palette.primary.main,
+    width: 28,
+    height: 28,
   },
   filterPaper: {
     maxWidth: '50%',
