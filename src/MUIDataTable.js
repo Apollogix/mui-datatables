@@ -2003,11 +2003,7 @@ class MUIDataTable extends React.Component {
         <div
           style={{ position: 'relative', ...tableHeightVal }}
           className={responsiveClass}
-          onScroll={
-            this.options.selectableRows === 'multiple'
-              ? () => this.onScroll(tableProps.id)
-              : () => console.log('no effect')
-          }
+          onScroll={this.options.selectableRows === 'multiple' ? () => this.onScroll(tableProps.id) : undefined}
           id={tableProps.id}>
           {(this.options.resizableColumns === true ||
             (this.options.resizableColumns && this.options.resizableColumns.enabled)) && (
