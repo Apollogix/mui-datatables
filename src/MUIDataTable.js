@@ -1941,6 +1941,8 @@ class MUIDataTable extends React.Component {
       dndProps.context = window;
     }
 
+    console.log('selectableRows', this.options.selectableRows);
+
     return (
       <Paper elevation={this.options.elevation} ref={this.tableContent} className={paperClasses}>
         {(this.options.selectToolbarPlacement === STP.ALWAYS ||
@@ -2001,7 +2003,11 @@ class MUIDataTable extends React.Component {
         <div
           style={{ position: 'relative', ...tableHeightVal }}
           className={responsiveClass}
-          onScroll={() => this.onScroll(tableProps.id)}
+          onScroll={
+            this.options.selectableRows === 'multiple'
+              ? () => this.onScroll(tableProps.id)
+              : () => console.log('no effect')
+          }
           id={tableProps.id}>
           {(this.options.resizableColumns === true ||
             (this.options.resizableColumns && this.options.resizableColumns.enabled)) && (

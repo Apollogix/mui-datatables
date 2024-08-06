@@ -99,7 +99,7 @@ const handleHover = opts => {
     let newColModel = getColModel(headCellRefs, reorderedCols, columns);
 
     let newX = scrollX + mon.getClientOffset().x;
-    console.log('newX', newX, window.scrollX, newColModel);
+
     let modelIdx = -1;
     for (let ii = 0; ii < newColModel.length; ii++) {
       if (newX > newColModel[ii].left && newX < newColModel[ii].left + newColModel[ii].width) {
